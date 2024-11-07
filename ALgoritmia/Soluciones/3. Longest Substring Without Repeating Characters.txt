@@ -1,0 +1,44 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    if (s.length < 1) {
+        return 0;
+    }
+    let result = 0;
+    let map = new Map();
+    map.set(s[0], 0);
+
+    for (let i = 1; i < s.length; i++) {
+        let key = s[i];
+        if (!map.has(key)) {
+            map.set(key, i);
+            continue
+        }
+        if(map.size > result){
+            result = map.size;
+        }
+        for(let oldKey of map.keys()){
+            if(oldKey != key){
+                map.delete(oldKey);
+            } else {
+                map.delete(oldKey);
+                map.set(key, i);
+                break;
+            }
+        }
+
+    }
+
+    if(result == 0){
+        return s.length;
+    }
+
+    if(result> map.size){
+        return result
+    } else {
+        return map.size
+    }
+
+};
