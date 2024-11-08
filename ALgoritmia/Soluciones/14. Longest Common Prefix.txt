@@ -1,0 +1,33 @@
+class Solution {
+    public String longestCommonPrefix(String[] list){
+
+        int minLenghtWord = 201;
+        String minWord = "";
+        for (String word : list) {
+            if(word.length() <= minLenghtWord){
+                minLenghtWord = word.length();
+                minWord = word;
+            }
+        }
+
+        boolean val = false;
+        StringBuilder pref = new StringBuilder();
+
+        for (int i = 0; i < minWord.length(); i++) {
+            for (int j = 0; j < list.length; j++) {
+                char word = list[j].charAt(i);
+                if(word != minWord.charAt(i)){
+                    val = true;
+                    break;
+                }
+            }
+
+            if (val){
+                break;
+            }
+            pref.append(minWord.charAt(i));
+        }
+
+        return pref.toString();
+    }
+}
