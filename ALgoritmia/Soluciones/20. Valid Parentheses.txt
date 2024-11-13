@@ -1,0 +1,41 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()%2 !=0){
+            return false;
+        }
+        HashMap<Character, Character> dicc = new HashMap<>();
+        dicc.put('{','}');
+        dicc.put('[',']');
+        dicc.put('(',')');
+        
+        boolean validator = true;
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if( c == '}' || c == ')' || c == ']'){
+                
+                if(stack.empty()){
+                    validator = false;
+                    break;
+                }
+                
+                if(dicc.get(stack.peek()) != c){
+                    validator = false;
+                    break;
+                } else {
+                    stack.pop();
+                }
+            } else {
+                stack.push(c);
+            }
+
+        }
+                if(validator){
+            if(stack.empty()){
+                return true;
+            }
+        }
+        return false;
+    }
+}
